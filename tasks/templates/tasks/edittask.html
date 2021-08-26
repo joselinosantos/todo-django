@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Editar tarefa '{{task.title}}' {% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Edite a tarefa '{{task.title}}'</h2>
+  <div class="row">
+    <form class="col s12" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="submit" class="btn red" value="Editar">
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}

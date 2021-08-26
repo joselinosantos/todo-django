@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Login {% endblock %}
+
+{% block content %}
+<div class="container valign-wrapper">
+    <div class="row">
+        <div class="col s12">
+
+            <div class="card-panel hoverable">
+                <h4>Login</h4>
+
+                <div class="divider"></div>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{next}}">
+
+                    {{ form|crispy }}
+                    <button class="btn red darken-1" type="submit">Acessar</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
