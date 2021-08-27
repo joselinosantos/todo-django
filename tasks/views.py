@@ -11,9 +11,9 @@ from .models import Task
 def tasklist(request):
     search = request.GET.get('search')
     if search:
-        tasks = Task.objects.filter(title__icontains=search)
+        tasks = Task.objects.filter(title__icontains=search, user=request.user)
     else: 
-        tasks_list = Task.objects.all().order_by('-created_at')
+        tasks_list = Task.objects.all().order_by('-created_at').filter(user=request.user)
         paginator = Paginator(tasks_list, 4)
 
         page = request.GET.get('page')
@@ -32,6 +32,7 @@ def newTask(request):
          if form.is_valid():
              task = form.save(commit=False)
              task.done = 'doing'
+             task.user = request.user
              task.save()
              return redirect('/')
     else:  
@@ -58,4 +59,15 @@ def deleteTask(request, id):
     task = get_object_or_404(Task, pk=id)
     task.delete()
     messages.info(request, 'Tarefa deletada')
+    return redirect('/')
+
+@login_required
+def changeStatus(request, id):
+    task = get_object_or_404(Task, pk=id)
+
+    if (task.done == 'doing'):
+        task.done = 'done'
+    else:
+        task.done = 'doing'
+    task.save()
     return redirect('/')

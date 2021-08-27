@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -11,9 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <title>{% block title %} {% endblock %}</title>
 </head>
-
 <body>
-
   <header>
     <nav>
       <div class="nav-wrapper container">
@@ -23,6 +21,7 @@
           {% if user.is_authenticated %}
           <li><a href="/">Tarefas</a></li>
           <li><a href="/users">Usuarios</a></li>
+          <li><a href="/accounts/profile">{{request.user}}</a></li>
           <li><a href="/accounts/logout">Logout</a></li>
           {% else %}
           <li><a href="/accounts/login">Entrar</a></li>
@@ -34,9 +33,9 @@
 
   {% block content %}
   {% endblock %}
-  <footer class="red">
+  <footer class="red lighten-2">
     <div class="container">
-      Footer
+      <h2>Todo list</h2>
     </div>
   </footer>
 
