@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard de tarefas {% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Dashboard de tarefas</h2>
+
+  <div class="row white-text">
+    <div class="col s12 m3">
+        <div class="card-panel hoverable center red" id="dashboard-lastdays">
+          <h5 class="card-title">Finalizadas nos últimos 30 dias</h5>
+          <div class="card-content">
+            <h4>{{ tasksRecently }}</h4>
+          </div>
+        </div>
+    </div>
+
+    <div class="col s12 m3">
+      <div class="card-panel hoverable center blue" id="dashboard-doing">
+        <h5 class="card-title">Tarefas a fazer</h5>
+        <div class="card-content">
+          <h4>{{ tasksDoing }}</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m3">
+      <div class="card-panel hoverable center purple" id="dashboard-done">
+        <h5 class="card-title">Tarefas concluídas</h5>
+        <div class="card-content">
+          <h4>{{ tasksDone }}</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m3">
+      <div class="card-panel hoverable center amber">
+        <h5 class="card-title">Outro indicador...</h5>
+        <div class="card-content">
+          <h4>0</h4>
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}

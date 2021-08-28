@@ -4,14 +4,19 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .forms import TaskForm
+import datetime
 
 from .models import Task
 
 @login_required
 def tasklist(request):
     search = request.GET.get('search')
+    filter = request.GET.get('filter')
+
     if search:
         tasks = Task.objects.filter(title__icontains=search, user=request.user)
+    elif filter:
+        tasks = Task.objects.filter(done=filter, user=request.user)
     else: 
         tasks_list = Task.objects.all().order_by('-created_at').filter(user=request.user)
         paginator = Paginator(tasks_list, 4)
@@ -19,6 +24,14 @@ def tasklist(request):
         page = request.GET.get('page')
         tasks = paginator.get_page(page)
     return render(request, 'tasks/list.html', {'tasks': tasks})
+
+@login_required
+def dashboard(request):
+    tasksDoneRecently = Task.objects.filter(done='done', updated_at__gt=datetime.datetime.now() - datetime.timedelta(days=30), user=request.user).count()
+    tasksDone = Task.objects.filter(done='done', user=request.user).count()
+    tasksDoing = Task.objects.filter(done='doing', user=request.user).count()
+
+    return render(request, 'tasks/dashboard.html', {'tasksRecently': tasksDoneRecently, 'tasksDone': tasksDone, 'tasksDoing':tasksDoing})
 
 @login_required
 def taskView(request, id):

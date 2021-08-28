@@ -7,18 +7,25 @@
   <div class="row">
     <div class="col s12">
       <div class="row">
-        <div class="input-field col s6">
-          <a class="btn blue" href="/newtask"><i class="material-icons">add</i> Nova Tarefa</a>
+        <div class="col s6">
+          <a class="btn deep-purple" href="/newtask"><i class="material-icons">add</i> Nova Tarefa</a>
         </div>
       </div>
 
       <div class="row">
-        <div class="input-field col s6">
-          <form id="search-form">
+        <form id="search-form">
+          <div class="input-field col s6">
             <input placeholder="Buscar tarefa" name="search" value="{{ request.GET.search }}" id="buscar" type="text"><i
-              class="material-icons" id="search-btn">search</i>
-          </form>
-        </div>
+              class="material-icons prefix" id="search-btn">search</i>
+          </div>
+          <div class="input-field col s6">
+            <select name="filter" id="filter">
+              <option value="" disabled selected>Filtrar por</option>
+              <option value="done">Concluída</option>
+              <option value="doing">A fazer</option>
+            </select>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -53,13 +60,13 @@
           <td>{{ task.description }}</td>
           <td>{{ task.done }}</td>
           <td>
-            <a class="btn blue status-btn" title="Marcar como concluída" href="/changestatus/{{task.id}}"><i
+            <a class="status-btn" title="Marcar como concluída" href="/changestatus/{{task.id}}"><i
                 class="material-icons" id="check-btn">check</i></a>
-            <a class="btn green" title="Ver tarefa" href="/task/{{task.id}}"><i class="material-icons"
+            <a class="" title="Ver tarefa" href="/task/{{task.id}}"><i class="material-icons deep-purple-text"
                 id="ver-btn">visibility</i></a>
-            <a class="btn amber" title="Editar tarefa" href="/edit/{{task.id}}"><i class="material-icons"
+            <a class="" title="Editar tarefa" href="/edit/{{task.id}}"><i class="material-icons amber-text"
                 id="edit-btn">edit</i></a>
-            <a class="btn red delete-btn" title="Deletar tarefa" href="/delete/{{task.id}}"><i class="material-icons"
+            <a class="delete-btn" title="Deletar tarefa" href="/delete/{{task.id}}"><i class="material-icons red-text"
                 id="delete-btn">delete</i></a>
           </td>
         </tr>

@@ -6,7 +6,9 @@ footer {
     text-align: center;
     color: white;
 }
-tr.grey-text td a.btn {
-    background-color: grey;
+tr.grey-text a.status-btn .material-icons {
     color: grey;
 }
+.card-panel {
+    height: 180px;
+  }
