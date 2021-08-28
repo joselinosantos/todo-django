@@ -9,12 +9,12 @@
 `virtualenv venv`
 `. venv/bin/activate` 
 
-# 2. Install Django - pip install django
+# 2. Install Django
 `pip install django`
 
 # 3. Clone this repository
 `git clone https://github.com/joselinosantosti/todo-django-app.git`
-## Or use aweasome [Githubdesktop](https://desktop.github.com/)
+## Or use aweasome [Github Desktop](https://desktop.github.com/)
 
 # 4. Extract files in your local project folder
 # 5. Run the app
