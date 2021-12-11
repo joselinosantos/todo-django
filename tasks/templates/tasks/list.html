@@ -45,6 +45,7 @@
         <tr>
           <th>Tarefa</th>
           <th>Descrição</th>
+          <th>Categoria</th>
           <th>Status</th>
           <th>Ações</th>
         </tr>
@@ -58,6 +59,7 @@
           {% endif %}
           <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
+          <td>{{ task.categoria }}</td>
           <td>{{ task.done }}</td>
           <td>
             <a class="status-btn" title="Marcar como concluída" href="/changestatus/{{task.id}}"><i
