@@ -26,14 +26,6 @@ def tasklist(request):
     return render(request, 'tasks/list.html', {'tasks': tasks})
 
 @login_required
-def dashboard(request):
-    tasksDoneRecently = Task.objects.filter(done='done', updated_at__gt=datetime.datetime.now() - datetime.timedelta(days=30), user=request.user).count()
-    tasksDone = Task.objects.filter(done='done', user=request.user).count()
-    tasksDoing = Task.objects.filter(done='doing', user=request.user).count()
-
-    return render(request, 'tasks/dashboard.html', {'tasksRecently': tasksDoneRecently, 'tasksDone': tasksDone, 'tasksDoing':tasksDoing})
-
-@login_required
 def taskView(request, id):
     task = get_object_or_404(Task, pk=id)
     return render(request, 'tasks/task.html', {'task': task})
@@ -62,10 +54,7 @@ def editTask(request, id):
         if(form.is_valid()):
             task.save()
             return redirect('/')
-        else:
-            return render(request, 'tasks/edittask.html', {'form':form, 'task':task})
-    else:
-        return render(request, 'tasks/edittask.html', {'form':form, 'task':task})
+    return render(request, 'tasks/edittask.html', {'form':form, 'task':task})
 
 @login_required
 def deleteTask(request, id):
@@ -84,3 +73,11 @@ def changeStatus(request, id):
         task.done = 'doing'
     task.save()
     return redirect('/')
+
+@login_required
+def dashboard(request):
+    tasksDoneRecently = Task.objects.filter(done='done', updated_at__gt=datetime.datetime.now() - datetime.timedelta(days=30), user=request.user).count()
+    tasksDone = Task.objects.filter(done='done', user=request.user).count()
+    tasksDoing = Task.objects.filter(done='doing', user=request.user).count()
+
+    return render(request, 'tasks/dashboard.html', {'tasksRecently': tasksDoneRecently, 'tasksDone': tasksDone, 'tasksDoing':tasksDoing})
